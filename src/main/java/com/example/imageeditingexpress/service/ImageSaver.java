@@ -1,6 +1,5 @@
 package com.example.imageeditingexpress.service;
 
-import com.example.imageeditingexpress.model.ImageSettings;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
@@ -20,12 +19,11 @@ public class ImageSaver {
     private ImageView imageView;
 
 
-    public void saveImage(ImageSettings imageSettings){
+    public void saveImage(){
         Stage primaryStage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Image");
         File file = fileChooser.showSaveDialog(primaryStage);
-        System.out.println(file.getAbsolutePath());
         if (file != null) {
             setImageViewZoomToDefault(imageView);
             WritableImage image = imageView.snapshot(null, null);

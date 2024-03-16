@@ -12,9 +12,8 @@ public class DesignConfig {
         MenuBar menuBar = (MenuBar) root.lookup("#menuBar");
 
         for (Menu menu : menuBar.getMenus()) {
-            for (MenuItem menuItem : menu.getItems()) {
-                menuItem.setStyle("-fx-text-fill: white;");
-            }
+            menu.setStyle("-fx-text-fill: white;");
+            System.out.println("done");
         }
     }
 }

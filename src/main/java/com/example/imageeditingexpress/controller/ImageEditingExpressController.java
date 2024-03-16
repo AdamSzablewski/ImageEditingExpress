@@ -1,6 +1,5 @@
 package com.example.imageeditingexpress.controller;
 
-import com.example.imageeditingexpress.model.ImageSettings;
 import com.example.imageeditingexpress.service.ImageSaver;
 import com.example.imageeditingexpress.service.ImageManipulator;
 import com.example.imageeditingexpress.service.ImageZoomer;
@@ -19,6 +18,10 @@ import java.io.File;
 public class ImageEditingExpressController {
     public Button rotateLeftBtn;
     public Button rotateRightBtn;
+    public Slider blurSlideBar;
+    public Slider motionSlideBar;
+    public Slider bloomSlideBar;
+
     @FXML
     private Label welcomeText;
     @FXML
@@ -33,9 +36,8 @@ public class ImageEditingExpressController {
     private Slider contrastSlidingBar;
     private ImageZoomer imageViewer = new ImageZoomer();
     private Image image;
-    private ImageSettings imageSettings = new ImageSettings();
     private final ImageSaver imageCreator = new ImageSaver();
-    private final ImageManipulator imageManipulator = new ImageManipulator(imageView, imageSettings);
+    private final ImageManipulator imageManipulator = new ImageManipulator(imageView);
     private static ImageEditingExpressController instance;
     public static ImageEditingExpressController getInstance() {
         if (instance == null) {
@@ -54,6 +56,9 @@ public class ImageEditingExpressController {
         imageManipulator.handleBrightnessChange(brightnessSlideBar);
         imageManipulator.handleHueChange(hueSlidingBar);
         imageManipulator.handleContrastChange(contrastSlidingBar);
+        imageManipulator.handleBlurChange(blurSlideBar);
+        imageManipulator.handleBloomChange(bloomSlideBar);
+        imageManipulator.handleMotionBlurChange(motionSlideBar);
     }
 
     @FXML
@@ -87,7 +92,7 @@ public class ImageEditingExpressController {
 
     public void handleSaveAs(ActionEvent actionEvent) {
         try {
-            imageCreator.saveImage(imageSettings);
+            imageCreator.saveImage();
         }catch (Exception e){
             e.printStackTrace();
         }
