@@ -104,7 +104,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="878.0" prefWidth="324.0" style="-fx-background-color: #1e2b3a;">
                      <children>
-                        <Slider fx:id="saturationSlideBar" blockIncrement="0.1" layoutX="21.0" layoutY="37.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" />
+                        <Slider fx:id="saturationSlideBar" blockIncrement="0.1" layoutX="21.0" layoutY="37.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
                         <Label layoutX="28.0" layoutY="16.0" text="Saturation" textFill="WHITE" />
                         <Slider fx:id="brightnessSlideBar" blockIncrement="0.1" layoutX="24.0" layoutY="94.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
                         <Label layoutX="27.0" layoutY="75.0" text="Brightness" textFill="WHITE" />
@@ -116,7 +116,7 @@
                         <Label layoutX="34.0" layoutY="261.0" text="Blur" textFill="WHITE" />
                         <Slider fx:id="bloomSlideBar" blockIncrement="0.05" layoutX="29.0" layoutY="343.0" majorTickUnit="0.1" max="1.0" minorTickCount="0" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" value="1.0" />
                         <Label layoutX="34.0" layoutY="323.0" text="Bloom" textFill="WHITE" />
-                        <Slider fx:id="motionSlideBar" blockIncrement="5.0" layoutX="29.0" layoutY="408.0" majorTickUnit="5.0" minorTickCount="1" prefHeight="26.0" prefWidth="282.0" showTickMarks="true" snapToTicks="true" />
+                        <Slider fx:id="motionSlideBar" blockIncrement="5.0" layoutX="29.0" layoutY="408.0" majorTickUnit="15.0" minorTickCount="0" prefHeight="26.0" prefWidth="282.0" showTickMarks="true" snapToTicks="true" />
                         <Label layoutX="36.0" layoutY="380.0" text="Motion Blur" textFill="WHITE" />
                      </children>
                   </AnchorPane>
@@ -134,10 +134,10 @@
             <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
           </textFill>
         </Label>
-            <Button fx:id="zoomIn" mnemonicParsing="false" onAction="#handleZoomIn" opacity="0.5" text="+" />
-            <Button fx:id="zoomOut" mnemonicParsing="false" onAction="#handleZoomOut" opacity="0.5" prefHeight="26.0" prefWidth="26.0" text="-" />
-            <Button fx:id="rotateLeftBtn" mnemonicParsing="false" onAction="#handleRotateLeft" opacity="0.5" text="Rotate Left" />
-            <Button fx:id="rotateRightBtn" mnemonicParsing="false" onAction="#handleRotateRight" opacity="0.5" text="Rotate Right" />
+            <Button fx:id="zoomIn" mnemonicParsing="false" onAction="#handleZoomIn" text="+" />
+            <Button fx:id="zoomOut" mnemonicParsing="false" onAction="#handleZoomOut" prefHeight="26.0" prefWidth="26.0" text="-" />
+            <Button fx:id="rotateLeftBtn" mnemonicParsing="false" onAction="#handleRotateLeft" text="Rotate Left" />
+            <Button fx:id="rotateRightBtn" mnemonicParsing="false" onAction="#handleRotateRight" text="Rotate Right" />
         <Pane prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #576b82;" HBox.hgrow="ALWAYS" />
         <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
       </children>
