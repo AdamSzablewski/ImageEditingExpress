@@ -5,11 +5,11 @@ import com.example.imageeditingexpress.service.ImageManipulator;
 import com.example.imageeditingexpress.service.ImageZoomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import lombok.Getter;
 
@@ -21,6 +21,11 @@ public class ImageEditingExpressController {
     public Slider blurSlideBar;
     public Slider motionSlideBar;
     public Slider bloomSlideBar;
+    public ColorPicker brushColor;
+    public CheckBox useBrush;
+    @FXML
+    public Canvas canvas;
+    public Button clearPaintButton;
 
     @FXML
     private Label welcomeText;
@@ -34,11 +39,21 @@ public class ImageEditingExpressController {
     private Slider hueSlidingBar;
     @FXML
     private Slider contrastSlidingBar;
-    private ImageZoomer imageViewer = new ImageZoomer();
+    private ImageZoomer imageZoomer;
     private Image image;
     private final ImageSaver imageCreator = new ImageSaver();
-    private final ImageManipulator imageManipulator = new ImageManipulator(imageView);
+    private ImageManipulator imageManipulator;
     private static ImageEditingExpressController instance;
+
+    public ImageEditingExpressController(){
+        if (instance == null){
+            instance = this;
+            this.imageManipulator = new ImageManipulator(imageView);
+            this.imageZoomer = new ImageZoomer();
+        }else {
+            throw new IllegalStateException("Instance already exists");
+        }
+    }
     public static ImageEditingExpressController getInstance() {
         if (instance == null) {
             instance = new ImageEditingExpressController();
@@ -49,9 +64,15 @@ public class ImageEditingExpressController {
     @FXML
     public void initialize() {
         instance = this;
-        imageViewer.setImageView(imageView);
-        imageManipulator.setImageView(imageView);
+
+//        canvas.setHeight(imageView.getImage().getHeight());
+//        canvas.setWidth(imageView.getImage().getWidth());
+        canvas.setStyle("-fx-background-color: transparent;");
+
+        imageManipulator = new ImageManipulator(imageView, canvas);
+        //imageManipulator.setImageView(imageView);
         imageCreator.setImageView(imageView);
+        imageZoomer = new ImageZoomer(imageView, canvas);
         imageManipulator.handleSaturationChange(saturationSlideBar);
         imageManipulator.handleBrightnessChange(brightnessSlideBar);
         imageManipulator.handleHueChange(hueSlidingBar);
@@ -79,6 +100,8 @@ public class ImageEditingExpressController {
             imageView.setImage(image);
             imageView.setFitHeight(image.getHeight());
             imageView.setFitWidth(image.getWidth());
+            canvas.setHeight(imageView.getImage().getHeight());
+            canvas.setWidth(imageView.getImage().getWidth());
         }
     }
 
@@ -99,10 +122,18 @@ public class ImageEditingExpressController {
     }
 
     public void handleZoomIn(ActionEvent actionEvent) {
-        imageViewer.zoomIn();
+        imageZoomer.zoomIn();
     }
 
     public void handleZoomOut(ActionEvent actionEvent) {
-        imageViewer.zoomOut();
+        imageZoomer.zoomOut();
+    }
+
+    public void handlePaintDrag(MouseEvent mouseEvent) {
+        imageManipulator.handlePaintEvent(mouseEvent, brushColor, useBrush);
+    }
+
+    public void clearPaint(ActionEvent actionEvent) {
+        imageManipulator.clearPaint();
     }
 }

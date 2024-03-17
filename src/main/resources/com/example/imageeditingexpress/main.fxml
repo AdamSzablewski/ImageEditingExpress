@@ -33,7 +33,10 @@
 -->
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -52,7 +55,7 @@
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imageeditingexpress.controller.ImageEditingExpressController">
   <children>
-    <MenuBar fx:id="menuBar" style="-fx-background-color: #576b82;" VBox.vgrow="NEVER">
+    <MenuBar fx:id="menuBar" style="-fx-background-color: 576b82;" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -93,38 +96,42 @@
       <items>
         <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="-1.0" prefWidth="-1.0" vbarPolicy="NEVER">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="618.0" prefWidth="570.0" style="-fx-background-color: #2c3e50;">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" onDragDetected="#handlePaintDrag" prefHeight="618.0" prefWidth="570.0" style="-fx-background-color: #2c3e50;">
                      <children>
-                        <ImageView fx:id="imageView" fitHeight="468.0" fitWidth="533.0" layoutX="19.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="29.0" />
+                        <ImageView fx:id="imageView" fitHeight="479.0" fitWidth="533.0" layoutX="19.0" layoutY="29.0" onDragDetected="#handlePaintDrag" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="29.0" />
+                        <Canvas fx:id="canvas" height="538.0" layoutX="1.0" onDragDetected="#handlePaintDrag" width="568.0" />
                      </children>
             </AnchorPane>
           </content>
         </ScrollPane>
             <ScrollPane hbarPolicy="NEVER" hmax="0.0" prefHeight="539.0" prefWidth="452.0" vbarPolicy="NEVER">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="878.0" prefWidth="324.0" style="-fx-background-color: #1e2b3a;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="878.0" prefWidth="324.0" style="-fx-background-color: 1e2b3a;">
                      <children>
-                        <Slider fx:id="saturationSlideBar" blockIncrement="0.1" layoutX="21.0" layoutY="37.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
-                        <Label layoutX="28.0" layoutY="16.0" text="Saturation" textFill="WHITE" />
+                        <Slider fx:id="saturationSlideBar" blockIncrement="0.1" layoutX="21.0" layoutY="37.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" />
+                        <Label layoutX="28.0" layoutY="16.0" text="Saturation" />
                         <Slider fx:id="brightnessSlideBar" blockIncrement="0.1" layoutX="24.0" layoutY="94.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
-                        <Label layoutX="27.0" layoutY="75.0" text="Brightness" textFill="WHITE" />
+                        <Label layoutX="27.0" layoutY="75.0" text="Brightness" />
                         <Slider fx:id="contrastSlidingBar" blockIncrement="0.1" layoutX="27.0" layoutY="156.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
-                        <Label layoutX="29.0" layoutY="137.0" text="Contrast" textFill="WHITE" />
+                        <Label layoutX="29.0" layoutY="137.0" text="Contrast" />
                         <Slider fx:id="hueSlidingBar" blockIncrement="0.1" layoutX="27.0" layoutY="219.0" majorTickUnit="0.5" max="1.0" min="-1.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
-                        <Label layoutX="30.0" layoutY="200.0" prefHeight="17.0" prefWidth="37.0" text="Hue" textFill="WHITE" />
+                        <Label layoutX="30.0" layoutY="200.0" prefHeight="17.0" prefWidth="37.0" text="Hue" />
                         <Slider fx:id="blurSlideBar" blockIncrement="5.0" layoutX="30.0" layoutY="280.0" majorTickUnit="5.0" max="20.0" minorTickCount="1" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" />
-                        <Label layoutX="34.0" layoutY="261.0" text="Blur" textFill="WHITE" />
+                        <Label layoutX="34.0" layoutY="261.0" text="Blur" />
                         <Slider fx:id="bloomSlideBar" blockIncrement="0.05" layoutX="29.0" layoutY="343.0" majorTickUnit="0.1" max="1.0" minorTickCount="0" prefHeight="16.0" prefWidth="286.0" showTickMarks="true" snapToTicks="true" value="1.0" />
-                        <Label layoutX="34.0" layoutY="323.0" text="Bloom" textFill="WHITE" />
+                        <Label layoutX="34.0" layoutY="323.0" text="Bloom" />
                         <Slider fx:id="motionSlideBar" blockIncrement="5.0" layoutX="29.0" layoutY="408.0" majorTickUnit="15.0" minorTickCount="0" prefHeight="26.0" prefWidth="282.0" showTickMarks="true" snapToTicks="true" />
-                        <Label layoutX="36.0" layoutY="380.0" text="Motion Blur" textFill="WHITE" />
+                        <Label layoutX="36.0" layoutY="380.0" text="Motion Blur" />
+                        <ColorPicker fx:id="brushColor" layoutX="154.0" layoutY="468.0" />
+                        <CheckBox fx:id="useBrush" layoutX="29.0" layoutY="472.0" mnemonicParsing="false" text="Use Brush" />
+                        <Button fx:id="clearPaint" layoutX="29.0" layoutY="496.0" mnemonicParsing="false" onAction="#clearPaint" text="Clear" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
       </items>
     </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="-fx-background-color: #576b82;" VBox.vgrow="NEVER">
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" style="-fx-background-color: 576b82;" VBox.vgrow="NEVER">
       <children>
         <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Zoom" HBox.hgrow="ALWAYS">
           <font>
@@ -138,7 +145,7 @@
             <Button fx:id="zoomOut" mnemonicParsing="false" onAction="#handleZoomOut" prefHeight="26.0" prefWidth="26.0" text="-" />
             <Button fx:id="rotateLeftBtn" mnemonicParsing="false" onAction="#handleRotateLeft" text="Rotate Left" />
             <Button fx:id="rotateRightBtn" mnemonicParsing="false" onAction="#handleRotateRight" text="Rotate Right" />
-        <Pane prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #576b82;" HBox.hgrow="ALWAYS" />
+        <Pane prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: 576b82;" HBox.hgrow="ALWAYS" />
         <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
       </children>
       <padding>
