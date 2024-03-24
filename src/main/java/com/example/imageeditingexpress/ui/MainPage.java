@@ -1,4 +1,4 @@
-package com.example.imageeditingexpress.model;
+package com.example.imageeditingexpress.ui;
 
 import com.example.imageeditingexpress.config.DesignConfig;
 import javafx.fxml.FXMLLoader;

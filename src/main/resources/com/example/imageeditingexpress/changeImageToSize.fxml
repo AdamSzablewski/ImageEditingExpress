@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imageeditingexpress.controller.ImageResizeController">
+   <children>
+      <Button layoutX="265.0" layoutY="106.0" mnemonicParsing="false" onAction="#resizeImage" text="Change" />
+      <TextField fx:id="desiredSizeField" layoutX="42.0" layoutY="106.0" promptText="Desired files size in MB" />
+   </children>
+</AnchorPane>

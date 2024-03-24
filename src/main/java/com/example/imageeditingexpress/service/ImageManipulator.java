@@ -1,6 +1,7 @@
 package com.example.imageeditingexpress.service;
 
 import com.example.imageeditingexpress.controller.ImageEditingExpressController;
+import com.example.imageeditingexpress.model.Brush;
 import com.example.imageeditingexpress.model.Effects;
 import com.example.imageeditingexpress.util.ImageRotator;
 import javafx.fxml.FXML;
@@ -17,27 +18,18 @@ import lombok.NoArgsConstructor;
 public class ImageManipulator {
     @FXML
     private ImageView imageView;
-    private Canvas canvas = ImageEditingExpressController.getInstance().getCanvas();
+    private Canvas canvas;
     private ImageRotator imageRotator;
     private Effects effects;
-
-
-    public ImageManipulator(ImageView imageView) {
-        this.imageView = imageView;
-        this.imageRotator = new ImageRotator();
-        this.effects = new Effects();
-    }
+    private Brush brush;
 
     public ImageManipulator(ImageView imageView, Canvas canvas) {
         this.imageView = imageView;
         this.canvas = canvas;
-    }
-
-
-    public void setImageView(ImageView imageView){
-        this.imageView = imageView;
-        this.imageRotator.setImageView(imageView);
-        this.imageView.setEffect(effects.getEffectsForImageView());
+        this.imageRotator = new ImageRotator(imageView, canvas);
+        this.effects = new Effects();
+        this.brush = new Brush(this.canvas);
+        imageView.setEffect(effects.getEffectsForImageView());
     }
     public void handleSaturationChange(Slider saturationSlideBar) {
         saturationSlideBar.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -68,13 +60,11 @@ public class ImageManipulator {
         blurSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             effects.changeGaussianBlur(blurSlider.valueProperty());
         });
-
     }
     public void handleMotionBlurChange(Slider motionSlideBar) {
         motionSlideBar.valueProperty().addListener((observable, oldValue, newValue) -> {
             effects.changeMotionBlur(motionSlideBar.valueProperty());
         });
-
     }
     public void rotateLeft() {
         imageRotator.rotateLeft();
@@ -82,26 +72,22 @@ public class ImageManipulator {
     public void rotateRight() {
         imageRotator.rotateRight();
     }
-
-
-    public void handlePaintEvent(MouseEvent mouseEvent, ColorPicker brushColor, CheckBox useBrush) {
+    public void handlePaintEvent(MouseEvent mouseEvent, CheckBox useBrush) {
         if(useBrush.isSelected()){
-            GraphicsContext gc = canvas.getGraphicsContext2D();
-
-            canvas.setOnMouseDragged(e -> {
-                double x = e.getX();
-                double y = e.getY();
-                System.out.println("draged");
-                gc.setFill(brushColor.getValue());
-                gc.fillOval(x - 2, y - 2, 20, 40); // Draw a small dot
-                e.consume();
+            canvas.setOnMouseDragged(mouse -> {
+                brush.paint(mouse.getX(), mouse.getY());
+                mouse.consume();
             });
         }
     }
-
     public void clearPaint() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        brush.clearAll();
+    }
+
+    public void handlePaintBrushResize(Slider brushSize) {
+        brushSize.valueProperty().addListener((observable, oldValue, newValue) -> {
+            brush.setSize(newValue.doubleValue());
+        });
 
     }
 }

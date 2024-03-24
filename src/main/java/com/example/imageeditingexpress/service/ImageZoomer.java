@@ -1,7 +1,9 @@
 package com.example.imageeditingexpress.service;
 
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ZoomEvent;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -24,13 +26,14 @@ public class ImageZoomer {
         canvas.setScaleY(currentZoom);
 
     }
-    public void updateZoom(ImageView imageView){
+    public void updateZoom(Node node){
         if(currentZoom < 0){
-            imageView.setScaleX(0.1);
-            imageView.setScaleY(0.1);
+            node.setScaleX(0.1);
+            node.setScaleY(0.1);
+            currentZoom = 0.1;
         }else {
-            imageView.setScaleX(currentZoom);
-            imageView.setScaleY(currentZoom);
+            node.setScaleX(currentZoom);
+            node.setScaleY(currentZoom);
         }
     }
 
@@ -43,9 +46,13 @@ public class ImageZoomer {
         currentZoom -= zoomIntensity;
         updateZoom();
     }
-    public void zoomToDefault(ImageView imageView){
+    public void zoomToDefault(ImageView imageView, Canvas canvas){
         currentZoom = 1;
         updateZoom(imageView);
+        updateZoom(canvas);
     }
 
+    public void zoomFromZoomEvent(ZoomEvent zoomEvent) {
+        //todo add impl
+    }
 }

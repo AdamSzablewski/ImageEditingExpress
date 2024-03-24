@@ -19,7 +19,7 @@ public class ImageSaver {
     private ImageView imageView;
 
 
-    public void saveImage(){
+    public void saveImage(ImageView imageView){
         Stage primaryStage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Image");
@@ -40,7 +40,7 @@ public class ImageSaver {
     }
     private void setImageViewZoomToDefault(ImageView imageView){
         ImageZoomer imageZoomer = new ImageZoomer();
-        imageZoomer.zoomToDefault(imageView);
+        //imageZoomer.zoomToDefault(imageView);
     }
 
     public void setImageView(ImageView imageView) {
