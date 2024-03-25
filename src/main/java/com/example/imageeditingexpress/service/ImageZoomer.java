@@ -46,7 +46,11 @@ public class ImageZoomer {
         currentZoom -= zoomIntensity;
         updateZoom();
     }
-    public void zoomToDefault(ImageView imageView, Canvas canvas){
+    public void zoomToDefault(ImageView imageView){
+        currentZoom = 1;
+        updateZoom(imageView);
+    }
+    public void zoomToDefault(){
         currentZoom = 1;
         updateZoom(imageView);
         updateZoom(canvas);

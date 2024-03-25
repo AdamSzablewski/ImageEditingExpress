@@ -4,6 +4,7 @@ import com.example.imageeditingexpress.controller.ImageEditingExpressController;
 import com.example.imageeditingexpress.model.Brush;
 import com.example.imageeditingexpress.model.Effects;
 import com.example.imageeditingexpress.util.ImageRotator;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,6 +14,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
+
+import java.util.Objects;
 
 @NoArgsConstructor
 public class ImageManipulator {
@@ -74,9 +77,11 @@ public class ImageManipulator {
     }
     public void handlePaintEvent(MouseEvent mouseEvent, CheckBox useBrush) {
         if(useBrush.isSelected()){
-            canvas.setOnMouseDragged(mouse -> {
-                brush.paint(mouse.getX(), mouse.getY());
-                mouse.consume();
+            GraphicsContext gc = canvas.getGraphicsContext2D();
+            brush.setGraphicsContext(gc);
+            canvas.setOnMouseDragged(e -> {
+                brush.paint(e.getX(), e.getY());
+                e.consume();
             });
         }
     }
@@ -87,7 +92,18 @@ public class ImageManipulator {
     public void handlePaintBrushResize(Slider brushSize) {
         brushSize.valueProperty().addListener((observable, oldValue, newValue) -> {
             brush.setSize(newValue.doubleValue());
+            brush.moveToCenter();
+            if (!Objects.equals(oldValue, newValue)){
+                brush.showBrush(true);
+            }else {
+                brush.showBrush(false);
+            }
+            // todo fix circle
         });
+        brush.showBrush(false);
+    }
 
+    public void brushMoveEventHandler(MouseEvent mouseEvent) {
+       // Platform.runLater(()-> brush.move(mouseEvent));
     }
 }

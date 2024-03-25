@@ -12,12 +12,8 @@ import java.io.File;
 
 @Data
 public class ImageResizeController {
-
-
     public TextField desiredSizeField;
     public ImageEditingExpressController imageEditingExpressController = ImageEditingExpressController.getInstance();
-
-
     public void resizeImage(ActionEvent actionEvent) {
         ImageResizer imageResizer = new ImageResizer();
         ValueConverter valueConverter = new ValueConverter();
@@ -27,7 +23,7 @@ public class ImageResizeController {
         if(validator.validateNumeric(requestedSizeText)){
             int mb = valueConverter.convertStringToInt(requestedSizeText);
             Image resizedImage = imageResizer.resizeImageToSize(image, mb);
-            imageEditingExpressController.setImage(resizedImage);
+            imageEditingExpressController.configureImageView(resizedImage, mb);
         }
 
     }

@@ -24,19 +24,11 @@ public class ImageResizer {
         Image originalImage = ImageEditingExpressController.getInstance().getImage();
         try {
             BufferedImage bufferedImage = ImageIO.read(file);
-            System.out.println("current size "+currentSize);
-            System.out.println("desired size: "+desiredSize);
-            double multiplyer = (double) desiredSize / (double) currentSize;
-            System.out.println("multiplier "+ multiplyer);
-
+            double multiplyer = (double) desiredSize / currentSize;
             int newWidth = (int) (originalImage.getWidth() * multiplyer);
             int newHeight = (int) (originalImage.getHeight() * multiplyer);
-            System.out.println(newHeight);
-            System.out.println(newWidth);
-
 
             return convertAWTImageToFX(resizeAWTImage(bufferedImage, newWidth, newHeight));
-            //todo work on resize image to MB
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

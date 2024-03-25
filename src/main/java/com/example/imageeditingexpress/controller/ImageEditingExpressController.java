@@ -10,8 +10,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ZoomEvent;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +36,7 @@ public class ImageEditingExpressController {
     public Label imageSize;
     public Label fileName;
     public Slider brushSize;
+    public Circle brush;
 
     @FXML
     private Label welcomeText;
@@ -69,20 +72,6 @@ public class ImageEditingExpressController {
         }
         return instance;
     }
-//    public ImageEditingExpressController(){
-//        if (instance == null){
-//            instance = this;
-//        }else {
-//            throw new IllegalStateException("Instance already exists");
-//        }
-//    }
-//    public static ImageEditingExpressController getInstance() {
-//        if (instance == null) {
-//            instance = new ImageEditingExpressController();
-//        }
-//        return instance;
-//    }
-
     @FXML
     public void initialize() {
         imageSize.setText(null);
@@ -94,7 +83,6 @@ public class ImageEditingExpressController {
         this.imageZoomer = new ImageZoomer(imageView, canvas);
         startListners();
     }
-
     private void  startListners(){
         imageManipulator.handleSaturationChange(saturationSlideBar);
         imageManipulator.handleBrightnessChange(brightnessSlideBar);
@@ -117,24 +105,24 @@ public class ImageEditingExpressController {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
         );
-
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             mainImageFile = selectedFile;
             fileName.setText(selectedFile.getName());
             imageSize.setText(FileSize.getFileSizeMB(mainImageFile)+" MB");
             image = new Image(selectedFile.toURI().toString());
-            configureImageView(image);
+            configureImageView(image, (int) FileSize.getFileSizeMB(mainImageFile));
         }
     }
-    public void configureImageView(Image image){
+    public void configureImageView(Image image, int mb){
+
         imageView.setImage(image);
         imageView.setFitHeight(image.getHeight());
         imageView.setFitWidth(image.getWidth());
         canvas.setHeight(imageView.getImage().getHeight());
         canvas.setWidth(imageView.getImage().getWidth());
+        imageSize.setText(mb+" MB");
     }
-
     public void handleRotateLeft(ActionEvent actionEvent) {
         imageManipulator.rotateLeft();
     }
@@ -183,11 +171,24 @@ public class ImageEditingExpressController {
 
     public void resizeImage(ActionEvent actionEvent) {
 
-
     }
 
     public void resizeToMbSize(ActionEvent actionEvent) {
         FileResizeWindow window = new FileResizeWindow();
         window.createWindowMB();
+    }
+
+    public void setDisplaySize(Image image, int mb) {
+        setImage(image);
+        imageView.setImage(image);
+        canvas.setWidth(image.getWidth());
+        canvas.setHeight(image.getHeight());
+        imageSize.setText(mb+" MB");
+    }
+    public void moveBrush(MouseEvent event) {
+    }
+
+    public void handlePaintDragEnd(DragEvent dragEvent) {
+
     }
 }

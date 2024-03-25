@@ -21,6 +21,8 @@ public class ImageCombiner {
         this.canvas = canvas;
     }
     public ImageView getCombinedView(){
+        ImageZoomer imageZoomer = new ImageZoomer(imageView, canvas);
+        imageZoomer.zoomToDefault();
         Group group = new Group(imageView, canvas);
 
         SnapshotParameters params = new SnapshotParameters();

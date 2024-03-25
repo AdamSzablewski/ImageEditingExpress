@@ -52,6 +52,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -93,10 +94,11 @@
       <items>
         <ScrollPane hbarPolicy="NEVER" pannable="true" prefHeight="-1.0" prefWidth="-1.0" vbarPolicy="NEVER">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" onDragDetected="#handlePaintDrag" prefHeight="618.0" prefWidth="570.0" style="-fx-background-color: #2c3e50;">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" onDragDetected="#handlePaintDrag" prefHeight="503.0" prefWidth="570.0" style="-fx-background-color: #2c3e50;">
                      <children>
                         <ImageView fx:id="imageView" fitHeight="541.0" fitWidth="568.0" layoutX="1.0" layoutY="-1.0" onDragDetected="#handlePaintDrag" onZoom="#zoom" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-1.0" />
-                        <Canvas fx:id="canvas" height="538.0" layoutX="1.0" onDragDetected="#handlePaintDrag" onZoom="#zoom" width="568.0" />
+                        <Canvas fx:id="canvas" height="538.0" onDragDetected="#handlePaintDrag" onMouseMoved="#moveBrush" onZoom="#zoom" width="568.0" />
+                        <Circle fx:id="brush" fill="#1f93ff00" layoutX="304.0" layoutY="239.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
                      </children>
             </AnchorPane>
           </content>
@@ -156,7 +158,7 @@
         <Pane prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: 576b82;" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="fileName" layoutX="32.0" layoutY="5.0" text="Fileneme" />
-                  <Label fx:id="imageSize" layoutX="136.0" layoutY="5.0" text="Label" />
+                  <Label fx:id="imageSize" layoutX="304.0" layoutY="5.0" text="Label" />
                </children></Pane>
         <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
       </children>

@@ -1,5 +1,6 @@
 package com.example.imageeditingexpress.service;
 
+import com.example.imageeditingexpress.controller.ImageEditingExpressController;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javafx.embed.swing.SwingFXUtils;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,23 +27,26 @@ public class ImageSaver {
         fileChooser.setTitle("Save Image");
         File file = fileChooser.showSaveDialog(primaryStage);
         if (file != null) {
-            setImageViewZoomToDefault(imageView);
+
+            String pathRaw  = file.getPath();
             WritableImage image = imageView.snapshot(null, null);
-            System.out.println("Snapshot image width: " + image.getWidth());
-            System.out.println("Snapshot image height: " + image.getHeight());
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+            BufferedImage bufImageRGB = new BufferedImage((int)image.getWidth(), (int)image.getHeight(), BufferedImage.OPAQUE);
+            SwingFXUtils.fromFXImage(image, null).copyData(bufImageRGB.getRaster());
+            String format = pathRaw.contains(".png") ? "png" : "jpg";
+            int dotIndex = pathRaw.indexOf('.');
+            String path = dotIndex != -1 ? pathRaw.substring(0, dotIndex) : pathRaw;
             try {
-                boolean ok = ImageIO.write(bufferedImage, "png", new File("/Users/adamszablewski/Downloads/testing.png"));
+                boolean ok = ImageIO.write(bufImageRGB, format, new File(path+"."+format));
+                if (!ok){
+                    throw new RuntimeException("Image not saved");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
         }
     }
-    private void setImageViewZoomToDefault(ImageView imageView){
-        ImageZoomer imageZoomer = new ImageZoomer();
-        //imageZoomer.zoomToDefault(imageView);
-    }
+
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
