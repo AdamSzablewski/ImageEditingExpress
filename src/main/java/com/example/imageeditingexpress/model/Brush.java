@@ -35,13 +35,13 @@ public class Brush {
     }
 
     public void setSize(double multiplier) {
-        width = 1 * multiplier;
-        height = 1 * multiplier;
-        brush.setRadius(width);
+        width = multiplier;
+        height = multiplier;
+        brush.setRadius(2 * width);
     }
     public void paint(double x, double y){
         graphicsContext.setFill(color.getValue());
-        graphicsContext.fillOval(x - 2, y - 2, width, height);
+        graphicsContext.fillOval(x, y, brush.getRadius()*8, brush.getRadius()*8);
     }
 
 

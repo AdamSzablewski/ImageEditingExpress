@@ -93,17 +93,14 @@ public class ImageManipulator {
         brushSize.valueProperty().addListener((observable, oldValue, newValue) -> {
             brush.setSize(newValue.doubleValue());
             brush.moveToCenter();
-            if (!Objects.equals(oldValue, newValue)){
-                brush.showBrush(true);
-            }else {
-                brush.showBrush(false);
-            }
+
+            brush.showBrush(true);
+
             // todo fix circle
         });
-        brush.showBrush(false);
     }
 
-    public void brushMoveEventHandler(MouseEvent mouseEvent) {
-       // Platform.runLater(()-> brush.move(mouseEvent));
+    public void hideBrush() {
+        brush.showBrush(false);
     }
 }

@@ -1,13 +1,10 @@
 package com.example.imageeditingexpress.service;
 
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,8 +28,6 @@ public class ImageCombiner {
                 (int) imageView.getBoundsInParent().getWidth(),
                 (int) imageView.getBoundsInParent().getHeight());
         group.snapshot(params, combinedImage);
-        ImageView combinedImageView = new ImageView(combinedImage);
-
-        return combinedImageView;
+        return new ImageView(combinedImage);
     }
 }

@@ -65,7 +65,6 @@ public class ImageEditingExpressController {
         }
         instance = this;
     }
-
     public static ImageEditingExpressController getInstance() {
         if (instance == null) {
             instance = new ImageEditingExpressController();
@@ -190,5 +189,13 @@ public class ImageEditingExpressController {
 
     public void handlePaintDragEnd(DragEvent dragEvent) {
 
+    }
+
+    public void paintWithCircle(MouseEvent mouseEvent) {
+        imageManipulator.handlePaintEvent(mouseEvent, useBrush);
+    }
+
+    public void hideBrushSizeEvent(MouseEvent mouseEvent) {
+        imageManipulator.hideBrush();
     }
 }
