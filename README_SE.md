@@ -18,3 +18,7 @@ Genom att kombinera dessa funktioner erbjuder Image Editing Express användare e
 ![Nyans](https://github.com/AdamSzablewski/ImageEditingExpress/assets/114603622/9ddd0470-9988-4667-bba0-abf2aeda8be5)
 
 ![Saturation](https://github.com/AdamSzablewski/ImageEditingExpress/assets/114603622/cabc0f45-4957-438d-b06e-0bebc109618c)
+
+![Oskärpa](https://github.com/AdamSzablewski/ImageEditingExpress/assets/114603622/2125728f-1e56-4a57-894c-d60839c0d7b3)
+
+![Pensel](https://github.com/AdamSzablewski/ImageEditingExpress/assets/114603622/fd52263e-7bce-4a33-bd1b-caebf9945ab6)
