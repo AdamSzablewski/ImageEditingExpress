@@ -88,18 +88,13 @@ public class ImageManipulator {
     public void clearPaint() {
         brush.clearAll();
     }
-
     public void handlePaintBrushResize(Slider brushSize) {
         brushSize.valueProperty().addListener((observable, oldValue, newValue) -> {
             brush.setSize(newValue.doubleValue());
             brush.moveToCenter();
-
             brush.showBrush(true);
-
-            // todo fix circle
         });
     }
-
     public void hideBrush() {
         brush.showBrush(false);
     }

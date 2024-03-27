@@ -25,9 +25,6 @@ public class MainPage {
             throw new IllegalStateException("Instance not created yet");
         }
     }
-
-
-
     public void open(Stage stage, FXMLLoader fxmlLoader, int width, int height) throws IOException {
         Parent root = fxmlLoader.load();
         this.root = root;

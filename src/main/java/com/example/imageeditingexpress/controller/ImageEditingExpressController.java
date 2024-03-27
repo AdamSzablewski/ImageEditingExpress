@@ -1,9 +1,11 @@
 package com.example.imageeditingexpress.controller;
 
 import com.example.imageeditingexpress.config.DesignConfig;
+import com.example.imageeditingexpress.model.Browser;
 import com.example.imageeditingexpress.model.FileSize;
 import com.example.imageeditingexpress.service.*;
 import com.example.imageeditingexpress.ui.FileResizeWindow;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -22,22 +24,32 @@ import java.io.File;
 @Getter
 @Setter
 public class ImageEditingExpressController {
+    @FXML
     public Button rotateLeftBtn;
+    @FXML
     public Button rotateRightBtn;
+    @FXML
     public Slider blurSlideBar;
+    @FXML
     public Slider motionSlideBar;
+    @FXML
     public Slider bloomSlideBar;
+    @FXML
     public ColorPicker brushColor;
+    @FXML
     public CheckBox useBrush;
-
     @FXML
     public Canvas canvas;
+    @FXML
     public Button clearPaintButton;
+    @FXML
     public Label imageSize;
+    @FXML
     public Label fileName;
+    @FXML
     public Slider brushSize;
+    @FXML
     public Circle brush;
-
     @FXML
     private Label welcomeText;
     @FXML
@@ -164,10 +176,6 @@ public class ImageEditingExpressController {
     public void undoAll(ActionEvent actionEvent) {
         imageManipulator = new ImageManipulator(imageView, canvas);
     }
-
-    public void cut(ActionEvent actionEvent) {
-    }
-
     public void resizeImage(ActionEvent actionEvent) {
 
     }
@@ -177,25 +185,30 @@ public class ImageEditingExpressController {
         window.createWindowMB();
     }
 
-    public void setDisplaySize(Image image, int mb) {
-        setImage(image);
-        imageView.setImage(image);
-        canvas.setWidth(image.getWidth());
-        canvas.setHeight(image.getHeight());
-        imageSize.setText(mb+" MB");
+    public void setDisplaySize(int width, int height) {
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        canvas.setWidth(width);
+        canvas.setHeight(height);
     }
     public void moveBrush(MouseEvent event) {
     }
-
-    public void handlePaintDragEnd(DragEvent dragEvent) {
-
-    }
-
     public void paintWithCircle(MouseEvent mouseEvent) {
         imageManipulator.handlePaintEvent(mouseEvent, useBrush);
     }
-
     public void hideBrushSizeEvent(MouseEvent mouseEvent) {
         imageManipulator.hideBrush();
+    }
+    public void handleAboutProject(ActionEvent actionEvent) {
+        Browser browser = new Browser();
+        browser.goToGitHub();
+    }
+
+    public void handleQuit(ActionEvent actionEvent) {
+        Platform.exit();
+    }
+
+    public void handleNew(ActionEvent actionEvent) {
+        
     }
 }

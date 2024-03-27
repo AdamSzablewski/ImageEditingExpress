@@ -6,6 +6,5 @@ public class FileResizeWindow {
         Window window = new Window();
         window.createWindow("changeImageToSize.fxml",
                 500, 300, "Set new filesize");
-
     }
 }

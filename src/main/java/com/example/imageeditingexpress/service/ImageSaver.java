@@ -43,11 +43,8 @@ public class ImageSaver {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
-
-
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
     }

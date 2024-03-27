@@ -62,22 +62,17 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#handleNew" text="New" />
             <MenuItem mnemonicParsing="false" onAction="#handleOpenFile" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
             <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#handleQuit" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#undoAll" text="Undo All" />
-            <MenuItem mnemonicParsing="false" onAction="#cut" text="Cut" />
             <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#resizeImage" text="Resize Image" />
                   <MenuItem fx:id="resizeToMbSize" mnemonicParsing="false" onAction="#resizeToMbSize" text="Resize Image to MB size" />
@@ -85,7 +80,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="About">
           <items>
-            <MenuItem mnemonicParsing="false" text="About Image Editing Express" />
+            <MenuItem mnemonicParsing="false" onAction="#handleAboutProject" text="About Image Editing Express" />
           </items>
         </Menu>
       </menus>
