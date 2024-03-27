@@ -13,3 +13,6 @@ Image Editing Express är en applikation designad för snabb och enkel bildredig
 
 Genom att kombinera dessa funktioner erbjuder Image Editing Express användare en mångsidig och intuitiv plattform för att redigera och anpassa sina bilder på ett effektivt sätt.
 
+
+## Appen
+![Nyans](src/main/resources/com/example/imageeditingexpress/f18c932d-cc63-4069-9c60-c5636cbd529a.gif)

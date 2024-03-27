@@ -209,6 +209,6 @@ public class ImageEditingExpressController {
     }
 
     public void handleNew(ActionEvent actionEvent) {
-        
+
     }
 }
