@@ -16,12 +16,5 @@ public class DesignConfig {
     public static void setCustomStyles() {
     }
 
-    public void setTextColorToWhite(Parent root, Scene scene){
-        MenuBar menuBar = (MenuBar) root.lookup("#menuBar");
 
-        for (Menu menu : menuBar.getMenus()) {
-            menu.setStyle("-fx-text-fill: white;");
-            System.out.println("done");
-        }
-    }
 }
